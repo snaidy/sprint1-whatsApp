@@ -1,0 +1,117 @@
+@import 'reset';
+@import 'variables';
+
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $color-quinto;
+}
+
+.loguin {
+  text-align: center;
+  padding: 4px;
+  border: solid $color-terciario 1px;
+  border-radius: 5px;
+  width: 50vh;
+  height: 90vh;
+  background-color:white;
+
+  & h2 {
+    margin-bottom: 35px;
+    margin-top: 35px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 150px;
+
+    &__button{
+      text-decoration: none;
+        padding: 10px 20px;
+        margin: 30px 30px 0px 30px;
+        font-size: 16px;
+        background-color: $color-terciario;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: black;
+        &:hover {
+            background-color: $color-cuarto;
+            color: white;
+          }
+        &-link{
+        display: inline-block;
+        text-decoration: none;
+        color: black; 
+        &:hover{
+          color: white;
+        }
+        }
+    }
+    &__chaticon{
+        display:grid;
+        width: 300px; 
+        height: 150px;
+        align-items: center;
+        justify-items: center;
+         
+        &-icon{
+            
+            width: 70%;
+            height: 50%;
+              
+        }
+    }
+
+    &__hello{
+    margin-bottom: 20px;
+    background-color: $color-primario;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    &-icon{
+        width: 30px; /* Ajusta el ancho de los iconos aquí */
+        height: auto; /* La altura se ajustará automáticamente para mantener la proporción */
+        margin-right: 10px;   
+    }
+
+    }
+
+    &-input-container {
+      position: relative;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      width: auto;
+      justify-content: center;
+
+      & input{
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid $color-sexto;
+        border-radius: 5px;
+        &:focus {
+            border-color: $color-terciario; 
+            box-shadow: 0 0 5px 2px $color-primario;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+      }
+    }
+
+      &-input-icon {
+        width: 18px;
+        height: auto; 
+        margin-right: 10px; 
+      }
+    }
+  }
+}
