@@ -6,10 +6,10 @@
     <link rel="shortcut icon" href="https://www.svgrepo.com/show/475692/whatsapp-color.svg" type="image/x-icon">
     <title>Document</title>
 </head>
-<body>
+<body >
 
     <header class="header"></header>
-    <div class="loguin">
+    <div class="loguin" id="loguin">
         <form class="loguin__form">
             <div class="loguin__form__hello">
                 <span>Bienvenido a WhatsApp</span>
@@ -22,20 +22,18 @@
             <h2>Iniciar Sesión</h2>
             <div class="loguin__form-input-container">
               <img class="loguin__form-input-container-input-icon" src="https://www.svgrepo.com/show/518546/phone-alt2.svg" alt="phone">
-              <input type="text" placeholder="Número de celular">
+              <input type="text" id="phoneNumber" placeholder="Número de celular">
             </div>
             <div class="loguin__form-input-container">
               <img class="loguin__form-input-container-input-icon" src="https://www.svgrepo.com/show/518475/password.svg" alt="pass">
-              <input type="password" placeholder="Contraseña">
+              <input type="password" id="password" placeholder="Contraseña">
             </div>
-            <button class="loguin__form__button">Ingresa</button>
-            <button class="loguin__form__button">
-                <a href="./pages/SignUp.html" class="loguin__form__button-link">¡Registrate!</a>
-              </button>
+            <button class="loguin__form__button" id="ingresaButton">Ingresa</button>
+            <button class="loguin__form__button" id="registerButton">¡Regístrate!</button>
           </form>
     </div>
     
-    <!-- <div class="main ">
+    <div class="main hidden" id="register">
         <form class="main__form">
             <div class="main__form__hello">
                 <span>Bienvenido a WhatsApp</span>
@@ -70,7 +68,7 @@
                 </div>
                 
                 <div class="main__form__input">
-                <img class="main__form__input-img" src="https://www.svgrepo.com/show/418202/note-text-pencil.svg" alt="img">
+                <img class="main__form__input-img" src="https://www.svgrepo.com/show/509175/note.svg" alt="img">
                 <label     for="message">Message:</label>
                 <textarea id="message" name="message" class="main__form__input-text"></textarea>
                 </div>
@@ -78,6 +76,6 @@
                 <button type="submit">Sign up</button>
             
           </form>
-    </div> -->
+    </div>
 </body>
 </html>
