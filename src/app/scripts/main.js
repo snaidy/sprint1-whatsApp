@@ -1,19 +1,24 @@
 import "../styles/styles.scss"
-import validateCredentials from './services/getloguin.js';
-import { URL_API } from './services/data.js';
-
+import validateLoguin from './modules/validLog.js';
+import { URL_API_USER } from './services/data.js';
+import { getuser } from "./services/getuser.js";
+import swal from 'sweetalert2';
+import registrar from "./modules/registeruser";
 
 document.addEventListener('DOMContentLoaded', () => {
     const loguinDiv = document.getElementById('loguin');
     const registerDiv = document.getElementById('register');
     const registerButton = document.getElementById('registerButton');
+    // const homeDiv = document.getElementById('home');
 
     registerButton.addEventListener('click', (e) => {
         e.preventDefault();
         loguinDiv.classList.add('hidden');
         registerDiv.classList.remove('hidden');
+        // homeDiv.classList.add('hidden');
     });
 });
+
 
 //----------
 const ingresaButton = document.getElementById('ingresaButton');
@@ -26,8 +31,14 @@ ingresaButton.addEventListener('click', (e)=> {
   
     // Validar campos vacíos
     if (phoneNumber === '' || password === '') {
-        alert('Por favor, complete todos los campos.');
+        swal.fire({
+            title:'Por favor, complete todos los campos.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          })
         return; 
       }
-      validateCredentials(phoneNumber, password, URL_API);
+      validateLoguin(phoneNumber, password, URL_API_USER);
   });
+
+  registrar();
