@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loguinDiv = document.getElementById('loguin');
     const registerDiv = document.getElementById('register');
     const registerButton = document.getElementById('registerButton');
+    const buttonIngresa = document.getElementById('buttonIngresa');
+    const home = document.getElementById('home');
     // const homeDiv = document.getElementById('home');
 
     registerButton.addEventListener('click', (e) => {
@@ -17,6 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
         registerDiv.classList.remove('hidden');
         // homeDiv.classList.add('hidden');
     });
+
+
+        buttonIngresa.addEventListener('click', (e) => {
+        e.preventDefault();
+        registerDiv.classList.add('hidden');
+        home.classList.remove('hidden');
+        // homeDiv.classList.add('hidden');
+    });
+
+
 });
 
 

@@ -1,0 +1,543 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans: wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  height: calc(100vh - 0px);
+  background: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06), 0 2px 5px rgba(0, 0, 0, 0.06);
+  display: flex;
+
+  &__left {
+    position: relative;
+    flex: 30%;  
+    background-color: white;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    .header {
+      //width: 20vw;
+      display: flex;
+      flex-direction: column;
+      &__up {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        background-color: #ededed;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        border-radius: 1px;
+        .userimg {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          overflow: hidden;
+          border-radius: 50%;
+          cursor: pointer;
+          .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        .nav{
+          &__icon {
+            display: flex;
+            & li {
+              display: flex;
+              list-style: none;
+              cursor: pointer;
+              color: #51585c;
+              font-size: 1.5em;
+              margin-left: 22px;
+            }
+          }
+        }
+      }
+      &__down{        
+          position: relative;
+          width: 100%;
+          height: 50px;
+          background-color: #f6f6f6;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 15px;
+          & button {
+            position: absolute;
+            left: 30px;
+            top: 14px;
+            font-size: 1.2em;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+          }
+          .header__form {
+            width: 100%;
+            & input {
+              width: 100%;
+              outline: none;
+              border: none;
+              background-color: #fff;
+              padding: 6px;
+              height: 38px;
+              border-radius: 30px;
+              font-size: 14px;
+              padding-left: 40px;
+              &::placeholder {
+                color: #bbb;
+              }
+            }
+          }
+      }
+    }
+
+    //lista de chats
+    .chatlist
+    {  //width: 30vw;
+
+        position: relative;
+        height: calc(100% - 110px); /* 60 + 50 = 110*/
+        overflow-y: auto;
+
+        &__block
+        {
+            position: relative;
+            width: 100%;
+            display: flex;       
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+
+            .chatlist__img
+            {
+                position: relative;
+                min-width: 45px;
+                height: 45px;
+                overflow: hidden;
+                border-radius: 50%;
+                margin-right: 10px;
+
+                .cover 
+                {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            &.active
+            {
+                background: #ebebeb;
+            }
+            &:hover
+            {
+                background: #f5f5f5;
+            }
+
+            .chatlist__details
+            {
+                position: relative;
+                width: 100%;
+                .chatlist__head
+                {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 5px;
+
+                    & h4 
+                    {
+                        font-size: 1.1em;
+                        font-weight: 600;
+                        color: #111;
+                    }
+
+                    .chatlist__time
+                    {
+                        font-size: 0.75em;
+                        color: #111;
+                        &.unread
+                        {
+                            color: #06d755;                           
+                        }
+                    }
+
+
+                }
+
+
+                .chatlist__message
+                {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 300px;
+
+                    p
+                    {
+                      color: #aaa;
+                      display: -webkit-box;
+                      -webkit-line-clamp: 1;
+                      font-size: 0.9em;
+                      -webkit-box-orient: vertical;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+
+                      &.estado
+                      {
+                        &::before
+                        {
+                            content: '';
+                            display: inline-block;
+                            width: 16px;
+                            height: 16px;
+                            /* background-image: url('https://m1.paperblog.com/i/290/2901926/dobles-check-whatsapp-azul-rojo-amarillo-T-aI9m_Y.png'); */
+                            /* background-image: url('https://www.movilzona.es/app/uploads/2019/06/Doble-chaeck.png'); */
+                        
+                            background-image: url('https://cdn-icons-png.flaticon.com/512/60/60727.png');
+                            background-size: cover;
+                            margin-right: 10px;
+                            opacity: 0.2;
+                        }
+
+                        &.yes
+                        {
+                          &::before
+                          {
+                             
+                              width: 20px;
+                              height: 12px;
+                              /* background-image: url('https://m1.paperblog.com/i/290/2901926/dobles-check-whatsapp-azul-rojo-amarillo-T-aI9m_Y.png'); */
+                              /* background-image: url('https://www.movilzona.es/app/uploads/2019/06/Doble-chaeck.png'); */
+                          
+                              background-image: url('https://www.movilzona.es/app/uploads/2019/06/Doble-chaeck.png');
+                              opacity: 2;
+                          }
+                        }
+
+
+                      }
+                    }
+
+
+                    b 
+                    {
+                      background-color: #06d755;
+                      color: #fff;
+                      min-width: 20px;
+                      height: 20px;
+                      border-radius: 50%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      font-size: 0.75em;
+                    }
+                }
+            }
+        }
+          
+    }
+  }
+
+
+
+  &__right
+  {
+    position: relative;
+    flex: 70%;
+    background-color: #e5ddd5;
+    
+    &::before
+    {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://i.ibb.co/k376QQ9/fondo.png");
+        opacity: 0.2;
+    }
+
+    .header__up
+    {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        background-color: #ededed;
+        display: flex;
+        justify-content:    space-between;
+        align-items: center;
+        padding: 0 15px;
+        border-radius: 1px;
+
+        /* margin-left:1px; */
+        
+        .imgtext
+        {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            
+          .userimg 
+          {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 50%;
+                cursor: pointer;
+                .cover 
+                {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+          }
+
+
+          h4
+          {
+            font-weight: 500;
+            line-height: 1.2em;
+            margin-left: 15px;
+
+            span 
+            {
+              font-size: 0.8em;
+              color: #555;
+            }
+          }
+  
+
+        }
+
+
+        
+        .nav
+        {
+          &__icon 
+          {
+            display: flex;
+            & li 
+            {
+              display: flex;
+              list-style: none;
+              cursor: pointer;
+              color: #51585c;
+              font-size: 1.5em;
+              margin-left: 22px;
+            }
+          }
+        }
+    
+        
+    }
+
+
+    .chat
+    {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 120px); /* 60 + 60 = 120*/
+      padding: 50px;
+      overflow-y: auto;
+
+      .message
+      {
+        position: relative;
+        display: flex;
+        width: 100%;
+        margin: 5px 0;
+
+        .visto
+        {
+          &::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            /* background-image: url('https://m1.paperblog.com/i/290/2901926/dobles-check-whatsapp-azul-rojo-amarillo-T-aI9m_Y.png'); */
+            /* background-image: url('https://www.movilzona.es/app/uploads/2019/06/Doble-chaeck.png'); */
+        
+            background-image: url('https://cdn-icons-png.flaticon.com/512/60/60727.png');
+            background-size: cover;
+            margin-left: 5px;
+            opacity: 0.6;
+
+
+          }
+
+          &.yes
+          {
+            &::after {
+              background-image: url('https://www.movilzona.es/app/uploads/2019/06/Doble-chaeck.png');
+              width: 20px;
+              height: 12px;
+              opacity: 2;
+            }
+          }
+        }
+
+        &.me
+        {
+          justify-content: flex-end;
+        }
+
+        &.friend
+        {
+          justify-content: flex-start;
+
+          p 
+          {
+            background-color: #fff;
+
+            &::before
+            {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -12px;
+                width: 20px;
+                height: 20px;
+                background: linear-gradient(225deg, #fff 0%, #fff 50%, transparent 50%, transparent);
+            
+            }
+          }
+        }
+
+        p
+        {
+          position: relative;
+          right: 0;
+          text-align: right;
+          max-width: 65%;
+          padding: 12px;
+          background-color: #dcf8c6;
+          border-radius: 10px;
+          font-size: 0.9em;
+          
+          &::before
+          {
+              content: '';
+              position: absolute;
+              top: 0;
+              right: -12px;
+              width: 20px;
+              height: 20px;
+              background: linear-gradient(135deg, #dcf8c6 0%, #dcf8c6 50%, transparent 50%, transparent);
+          
+          }
+        }
+
+
+        span
+        {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.85em;
+            opacity: 0.5;
+            
+        }
+        
+        
+      }
+    }
+
+
+    .input
+    {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      background: #f0f0f0;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      ion-icon
+      {
+          cursor: pointer;
+          font-size: 1.8em;
+          color: #51585c;
+
+          &:nth-child(1)
+          {
+              margin-right: 15px;
+          }
+          
+          
+      }
+
+      input
+      {
+          position: relative;
+          width: 90%;
+          margin: 0 20px;
+          padding: 10px 20px;
+          border: none;
+          outline: none;
+          border-radius: 30px;
+          font-size: 1em;
+      }
+
+
+      
+      
+    }
+
+  }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b9b3ae;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
