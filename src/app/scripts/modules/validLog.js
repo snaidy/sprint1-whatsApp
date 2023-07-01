@@ -1,12 +1,16 @@
-
+import { URL_API_CONVER } from '../services/data.js';
 import swal from 'sweetalert2';
 import { getuser } from '../services/getuser.js';
+import printPerfil from './printPerfil.js';
+import { getConversations } from '../services/getConversations.js';
 
 const validateLoguin = async (phoneNumber, password) => {
     try {
       const response = await getuser()
     // Buscar el usuario ingresado por número de celular y contraseña
       const user = response.find(u => u.number === phoneNumber && u.password === password);
+
+      
   
       if (user) {
         // Si se encuentra el usuario, mostrar mensaje de bienvenida y mandar al usuario a la página home
@@ -14,6 +18,9 @@ const validateLoguin = async (phoneNumber, password) => {
         // window.location.href = 'home.html'; // aqui se puede cambiar 'home.html' con la ruta que yo quiera
         const mensaje = 'Bienvenido, ' + user.name + '.';
         const numero = 'Tú número de teléfono es: ' + user.number;
+        const conversations = await getConversations(user.id);
+       
+
         swal.fire({
           title: mensaje,
           text: numero,
@@ -21,10 +28,13 @@ const validateLoguin = async (phoneNumber, password) => {
           confirmButtonText: 'Aceptar'
         }).then(() => {
           // Redirigir a la página 'home.html' después de hacer clic en el botón 'Aceptar'
- 
+
+          printPerfil(user.image);
+          console.log('+++');
+          console.log(conversations);
+          console.log('+++');
           const home = document.getElementById('home');
           const loguinDiv = document.getElementById('loguin');
-
           loguinDiv.classList.add('hidden');
           home.classList.remove('hidden');
 
