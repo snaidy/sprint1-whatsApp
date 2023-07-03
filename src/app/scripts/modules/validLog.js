@@ -3,6 +3,7 @@ import swal from 'sweetalert2';
 import { getuser } from '../services/getuser.js';
 import printPerfil from './printPerfil.js';
 import { getConversations } from '../services/getConversations.js';
+import printListChats from './printListChats.js';
 
 const validateLoguin = async (phoneNumber, password) => {
     try {
@@ -33,6 +34,10 @@ const validateLoguin = async (phoneNumber, password) => {
           console.log('+++');
           console.log(conversations);
           console.log('+++');
+
+          console.log('---');
+          printListChats(conversations, user.id);
+          console.log('---');
           const home = document.getElementById('home');
           const loguinDiv = document.getElementById('loguin');
           loguinDiv.classList.add('hidden');
