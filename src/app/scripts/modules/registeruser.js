@@ -1,5 +1,7 @@
 // import { getuser } from '../services/getuser.js';
 import getUserByPhone from "../services/getUserByPhone.js";
+import swal from 'sweetalert2';
+import { postU } from "../services/postuser.js";
 
 const registro = document.getElementById('registro');
 
@@ -9,7 +11,7 @@ const registrar = () => {
     
         const name = document.getElementById('name');
         const phoneNumber = document.getElementById('phone');
-        const password = document.getElementById('password');
+        const password = document.getElementById('passwordRegister');
         const imageUrl = document.getElementById('image');
         const message = document.getElementById('message');
         //voy a validar campos vacios
@@ -17,7 +19,8 @@ const registrar = () => {
         //     alert('Por favor, complete todos los campos.');
         //     return;
         //   }
-    
+        console.log('contraseña', password);
+        
         const newUser = {
             name: name.value,
             number: phoneNumber.value,
@@ -28,7 +31,7 @@ const registrar = () => {
             flag:false
             };
             console.log(newUser);
-        
+            
           const usuarioRegistrado = await validarPhoneNumberExistentes(
             phoneNumber.value
           );
@@ -36,10 +39,24 @@ const registrar = () => {
       console.log(usuarioRegistrado);
             
           if (usuarioRegistrado) {
-            alert("puedes crear el usuario");
+
+            // alert("puedes crear el usuario");
             //alerta que el usuario ya esta registrado post
+            swal.fire({
+              title:'Se puede crear este usuario.',
+              text: 'Puedes ingresar',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            })
+            postU(newUser);
+            
           } else {
-            alert("No se puede crear el usuario por que ya existe en la data");
+              swal.fire({
+              title:'Se ha producido un error.',
+              text: 'No se puede crear el usuario por que ya existe en la data.',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            })
           }
           //else if(!usuarioRegistrado){
         //     if (name === '' || phoneNumber === '' || password === '' || imageUrl === '' || message === '') {
@@ -89,7 +106,14 @@ const registrar = () => {
 const validarPhoneNumberExistentes = async (phoneNumber) => {
   const usuarioExistente = await getUserByPhone(phoneNumber);
   if (Object.entries(usuarioExistente).length) {
-    alert("Este número celular ya existe, por favor inicie sesión");
+    // alert("Este número celular ya existe, por favor inicie sesión");
+    swal.fire({
+      title:'Se ha producido un error.',
+      text: 'Este número celular ya existe, por favor inicie sesión.',
+      icon: 'error',
+      confirmButtonText: 'Aceptar'
+    })
+    
     return false;
   } else {
     return true;
