@@ -1,6 +1,7 @@
 // import { getuser } from '../services/getuser.js';
 import getUserByPhone from "../services/getUserByPhone.js";
 import swal from 'sweetalert2';
+import { postU } from "../services/postuser.js";
 
 const registro = document.getElementById('registro');
 
@@ -10,7 +11,7 @@ const registrar = () => {
     
         const name = document.getElementById('name');
         const phoneNumber = document.getElementById('phone');
-        const password = document.getElementById('password');
+        const password = document.getElementById('passwordRegister');
         const imageUrl = document.getElementById('image');
         const message = document.getElementById('message');
         //voy a validar campos vacios
@@ -18,7 +19,8 @@ const registrar = () => {
         //     alert('Por favor, complete todos los campos.');
         //     return;
         //   }
-    
+        console.log('contraseña', password);
+        
         const newUser = {
             name: name.value,
             number: phoneNumber.value,
@@ -29,7 +31,7 @@ const registrar = () => {
             flag:false
             };
             console.log(newUser);
-        
+            
           const usuarioRegistrado = await validarPhoneNumberExistentes(
             phoneNumber.value
           );
@@ -46,6 +48,7 @@ const registrar = () => {
               icon: 'success',
               confirmButtonText: 'Aceptar'
             })
+            postU(newUser);
             
           } else {
               swal.fire({
