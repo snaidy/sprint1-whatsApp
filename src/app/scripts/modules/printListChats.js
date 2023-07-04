@@ -98,7 +98,7 @@ import { getuser } from "../services/getuser";
 import swal from 'sweetalert2';
 import printHeaderChat from "./printHeaderChat";
 import printChat from "./printChat";
-
+import sendMessage from "./sendMessage";
 
 const printListChats =  (array, endpoint) => 
 
@@ -107,7 +107,7 @@ const printListChats =  (array, endpoint) =>
     try 
     {
         const idFriend = [];
-
+        let indicateChat = 0;
 
 
         array.sort(function(a, b) {
@@ -164,7 +164,13 @@ const printListChats =  (array, endpoint) =>
                 console.log(i);
                 
                 const response = await getuser();
+
+                localStorage.setItem("usuariosRegistrados", JSON.stringify(response));
                 let user = response.find(u => u.id == idFriend[i]);
+
+                const sendOutline = document.getElementById('sendOutline');
+
+
 
                 if (i == 0) 
                 { const status = 'Offline'
@@ -284,9 +290,67 @@ const printListChats =  (array, endpoint) =>
                     
                     section.addEventListener('click', () => 
                     {
+                        const input = document.getElementById('myInput');
+                        input.value = '';
+                        const vistoMe = JSON.parse(localStorage.getItem(`conversations_User_${endpoint}`));
+                        const vistoFriend = JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
+
+                        vistoMe.forEach(estado => 
+                        {
+                            if (estado.idUser1 == user.id || estado.idUser2 == user.id) 
+                            {
+                                const chatVisto = estado.chats;
+
+                                chatVisto.forEach(t => 
+                                {   
+                                    if (t.sendBy == user.id) 
+                                    {
+                                        //pEstado.classList.add('yes');
+                                        t.flag = true;
+
+        
+                                    }    
+                                });
+                            }
+
+                            
+                        });
+
+
+                        vistoFriend.forEach(estado => 
+                            {
+                                if (estado.idUser1 == endpoint || estado.idUser2 == endpoint) 
+                                {
+                                    const chatVisto = estado.chats;
+    
+                                    chatVisto.forEach(t => 
+                                    {   
+                                        if (t.sendBy == user.id) 
+                                        {
+                                            //pEstado.classList.add('yes');
+                                            t.flag = true;
+    
+            
+                                        }    
+                                    });
+                                }
+    
+                                
+                            });
+
+
+
+                        localStorage.setItem(`conversations_User_${endpoint}`, JSON.stringify(vistoMe));
+                        localStorage.setItem(`conversations_User_${user.id}`, JSON.stringify(vistoFriend));
+
+                        console.log("+++++++++++++++++++++++++++++++++++++");
+                        console.log(JSON.parse(localStorage.getItem(`conversations_User_${user.id}`)));
+                        console.log("+++++++++++++++++++++++++++++++++++++");
+
+
                         const elementos = document.querySelectorAll('.active');
 
-
+                        indicateChat = user.id;
 
                         elementos.forEach(elem => 
                         {
@@ -311,11 +375,81 @@ const printListChats =  (array, endpoint) =>
                 }
                 
             });    
+
+
+            
+
+
+
         });
         console.log('_____');
 
         console.log(conver);
         console.log('_____');    
+
+
+
+        sendOutline.addEventListener('click', () => {
+    
+           
+            let newConver = sendMessage(endpoint, indicateChat);
+
+            let arrayCon = JSON.parse(localStorage.getItem(`conversations_User_${endpoint}`));
+            let pruebaTwo = JSON.parse(localStorage.getItem(`conversations_User_${indicateChat}`));
+
+            console.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+            console.log(newConver);  
+            console.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+
+
+
+            arrayCon.forEach(mensaje => 
+            {
+                if (mensaje.idUser1 == indicateChat || mensaje.idUser2 == indicateChat) 
+                {
+                    console.log("Nuevo mensaje Agregado.");   
+                    console.log(newConver);   
+                    mensaje.chats.push(newConver);
+                    console.log("Nuevo mensaje Agregado.");    
+                }    
+            });
+
+            pruebaTwo.forEach(mensaje => 
+                {
+                    if (mensaje.idUser1 == endpoint || mensaje.idUser2 == endpoint) 
+                    {
+                        console.log("Nuevo mensaje Agregado.");   
+                        console.log(newConver);   
+                        mensaje.chats.push(newConver);
+                        console.log("Nuevo mensaje Agregado.");    
+                    }    
+                });
+
+            localStorage.setItem(`conversations_User_${endpoint}`, JSON.stringify(arrayCon));
+            localStorage.setItem(`conversations_User_${indicateChat}`, JSON.stringify(pruebaTwo));
+
+            let prueba = JSON.parse(localStorage.getItem(`conversations_User_${endpoint}`));
+            
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            console.log(prueba);  
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+            prueba.forEach(c => 
+            {
+                if (c.idUser1 == indicateChat || c.idUser2 == indicateChat) 
+                {
+                    printChat(c.chats, endpoint);
+                }
+            });
+
+
+           
+
+            // console.log("Los Usuarios son: ");
+            // console.log(JSON.parse(localStorage.getItem("usuariosRegistrados")));
+          
+
+        });
     } 
     catch (error) 
     {
