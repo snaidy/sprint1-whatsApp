@@ -2,6 +2,9 @@
 import getUserByPhone from "../services/getUserByPhone.js";
 import swal from 'sweetalert2';
 
+import axios from "axios";
+const url = 'https://whatsapp-8lqf.onrender.com/user';
+
 const registro = document.getElementById('registro');
 
 const registrar = () => {
@@ -48,7 +51,19 @@ const registrar = () => {
               text: 'Puedes ingresar',
               icon: 'success',
               confirmButtonText: 'Aceptar'
-            })
+            }).then(() => {
+              axios.post(url, newUser)
+              .then(response => {
+                console.log('Usuario agregado:', response.data);
+              })
+              .catch(error => {
+                console.error('Error al agregar el usuario:', error);
+              });
+
+              
+              
+    
+            });
             
           } else {
               swal.fire({
