@@ -1,4 +1,6 @@
-const printChat = (array, endpoint) => {
+
+import click from "./click";
+const printChat = (array, endpoint, idMensaje) => {
     const contenedor = document.getElementById('chatMain');
     contenedor.innerHTML = '';
   
@@ -9,13 +11,27 @@ const printChat = (array, endpoint) => {
   
        
           const optionsBox = createOptionsBox(); // Crea la caja de opciones
-          divMe.appendChild(optionsBox); // Agrega la caja de opciones al mensaje
+          divMe.appendChild(optionsBox); 
+          // Agrega la caja de opciones al mensaje// Dentro del bucle forEach en la función printChat
+          const inputEdit = document.createElement('input');
+          inputEdit.className = 'edit-input';
+          inputEdit.type = 'text';
+          inputEdit.style.display = 'none'; // Ocultar el input inicialmente
+          divMe.appendChild(inputEdit);
+          
+          const saveButton = document.createElement('button');
+          saveButton.className = 'save-button';
+          saveButton.textContent = 'Guardar';
+          saveButton.style.display = 'none'; // Ocultar el botón inicialmente
+          divMe.appendChild(saveButton);
+          
+          
         
       } else {
         divMe.className = 'message friend';
       }
   
-      divMe.setAttribute('data-id', index + 1);
+      divMe.setAttribute('data-id', message.id);
   
       const pMe = document.createElement('p');
       pMe.textContent = message.message;
@@ -36,6 +52,8 @@ const printChat = (array, endpoint) => {
   
       contenedor.appendChild(divMe);
     });
+
+    click(array,idMensaje, endpoint);
   };
   
   // Función para crear la caja de opciones
