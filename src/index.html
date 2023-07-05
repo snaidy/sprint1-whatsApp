@@ -90,8 +90,19 @@
         <section class="container">
 
             <section class="container__left">
+                <section class="edit-profile" style="display: none;">
+                    <button class="back-button">Back</button>
+                    <form class="profile-form">
+                      <label for="nombre">Nombre:</label>
+                      <input type="text" id="profileNameInput" placeholder="Edit profile name">
+                      <label for="imagen">Imagen:</label>
+                      <input type="url" id="profileImageInput" placeholder="Edit profile image URL">
+                      <button type="submit">Save</button>
+                    </form>
+                  </section>
+                  
     
-                <header class="header">
+                <header class="header" style="display: block;">
                     <!-- Navegación -->
                     <section class="header__up">
     
@@ -126,233 +137,9 @@
     
                 <!-- Lista de Chats -->
     
-                <main class="chatlist" id="alChatlist">
+                <main class="chatlist" id="alChatlist" style="display: block;">
     
-                    <!-- <section class="chatlist__block active">
-                        <figure class="chatlist__img">
-                            <img src="https://previews.123rf.com/images/mozgostudia/mozgostudia1501/mozgostudia150100177/35355167-alegre-dibujos-animados-chica-rubia-ilustraci%C3%B3n-vectorial.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Snaidy</h4>
-                            <p class="chatlist__time">14:30</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado">Hola, hombre, ¿cómo vas?</p>
-                        </div>
-                    </section>
-                    </section> -->
-    
-                    <!-- <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://i.pinimg.com/736x/6f/8b/c3/6f8bc31dd5cda0be10c610a08f040a5b.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Mars</h4>
-                            <p class="chatlist__time unread">13:10</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p>Tengo Hambre</p>
-                            <b>1</b>
-                        </div>
-                    </section>
-                    </section>
-    
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://i.pinimg.com/originals/78/b9/c6/78b9c60bdcf5a27274cf62b3ac426a53.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Finn</h4>
-                            <p class="chatlist__time unread">12:10</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p>¡A luchar, viejo!</p>
-                            <b>1</b>
-                        </div>
-                    </section>
-                    </section>
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://scontent.fbaq9-1.fna.fbcdn.net/v/t1.6435-9/97106120_138549574457603_2072917797356175360_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=55xvdV1zYQ0AX8Ri4kE&_nc_ht=scontent.fbaq9-1.fna&oh=00_AfDJhryDHgp5u-20pfGFHO4RtZXZ1NzeNx2B9Q0zG1BUiw&oe=64BAA8FE" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Glam</h4>
-                            <p class="chatlist__time unread">11:11</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p>Hagámoslo.</p>
-                            <b>2</b>
-                        </div>
-                    </section>
-                    </section>
-    
-    
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado yes">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section>
-    
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado yes">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section>
-    
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section>
-    
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado yes">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section>
-    
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado yes">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section>
-    
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section>
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado yes">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section>
-                    <section class="chatlist__block">
-                        <figure class="chatlist__img">
-                            <img src="https://cinemagavia.es/wp-content/uploads/2020/04/Samurai-Jack.1.jpg" alt="Imagen de Chat" class="cover">
-                        </figure>
-    
-                    
-                    <section class="chatlist__details">
-    
-                        <div class="chatlist__head">
-                            <h4>Jack</h4>
-                            <p class="chatlist__time">11:00</p>
-                        </div>
-                        <div class="chatlist__message">
-                            <p class="estado yes">⚔️</p>
-                            
-                        </div>
-                    </section>
-                    </section> -->
-    
+
     
                 </main>
     
@@ -363,37 +150,13 @@
             <section class = "container__right" id="container__right">
     
                 <header class="header__up" id="header__up">
-                    <!-- <span class="imgtext">
-                        <figure class="userimg">
-                            <img src="https://previews.123rf.com/images/mozgostudia/mozgostudia1501/mozgostudia150100177/35355167-alegre-dibujos-animados-chica-rubia-ilustraci%C3%B3n-vectorial.jpg" alt="perfil" class="cover">
-                        </figure>
-                        <h4>Snaidy <br><span>Online</span></h4>
-                    </span>
-    
-                    
-    
-                    <nav class="nav">
-                        <ul class="nav__icon">
-                            
-                            <li><ion-icon name="search-outline"></ion-icon></li>
-                            <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
-                        </ul>
-                    </nav> -->
+
     
                 </header>
                 <!--ChatBox-->
                 <main class="chat" id="chatMain">
     
-                    <!-- <div class="message me">
-                        <p>Buen día, girl. <br> <span class="visto yes">13:20</span></p>
-                    </div>
-    
-                 
-                      
-    
-                    <div class="message friend">
-                        <p>Holaa. <br> <span>13:22</span></p>
-                    </div> -->
+
 
      
           

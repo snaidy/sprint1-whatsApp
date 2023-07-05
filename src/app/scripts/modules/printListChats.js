@@ -12,6 +12,8 @@ import postMessage from "../services/postMessage";
 import deleteMessage from "../services/deleteMessage";
 import axios from "axios";
 import getlistChat from "../services/getlistChat";
+import patchPerfil from "../services/patchPerfil";
+import printPerfil from "./printPerfil";
 
 const printListChats = async (endpoint) => 
 
@@ -151,9 +153,61 @@ const printListChats = async (endpoint) =>
                 }
 
 
+                const userImg = document.getElementById('fotoPerfil');
+                const editProfileSection = document.querySelector('.edit-profile');
+                const profileNameInput = document.getElementById('profileNameInput');
+                const profileImageInput = document.getElementById('profileImageInput');
+                const headerPerfil = document.querySelector('.header');
+                const alChatlistPerfil = document.querySelector('.chatlist');
+                userImg.addEventListener('click', () => {
+
+                    headerPerfil.classList.add('hidden');
+                    alChatlistPerfil.classList.add('hidden');
+                    editProfileSection.style.display = 'block';
+                    const UsuarioLogueado = JSON.parse(localStorage.getItem('UsuarioLogueado'));
+                    profileNameInput.value = UsuarioLogueado.name;
+                    profileImageInput.value = UsuarioLogueado.image;
+
+                });
+                
+                
+                
+                const profileForm = document.querySelector('.profile-form');
+
+                profileForm.addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                
+                  // Obtén los valores de los inputs de nombre y foto de perfil
+
+                  const newName = profileNameInput.value;
+                  const newImage = profileImageInput.value;
+                
+                  const newUser = await patchPerfil (endpoint, newName, newImage);
+
+                  localStorage.setItem('UsuarioLogueado', JSON.stringify(newUser));
+                  printPerfil(newImage);
+                
+                  // Vuelve a ocultar la sección de edición de perfil y mostrar la sección principal
+                  editProfileSection.style.display = 'none';
+                  headerPerfil.classList.remove('hidden');
+                  alChatlistPerfil.classList.remove('hidden');
+                });
                 
 
 
+                
+                
+                const backButton = document.querySelector('.back-button');
+                backButton.addEventListener('click', () => {
+                  editProfileSection.style.display = 'none';
+                  headerPerfil.classList.remove('hidden');
+                  alChatlistPerfil.classList.remove('hidden');
+
+                });
+
+                
+
+                
 
                 if(index==(e.length-1))
                 {

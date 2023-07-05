@@ -56,7 +56,7 @@ const validateLoguin = async (phoneNumber, password) => {
           confirmButtonText: 'Aceptar'
         }).then(() => {
           // Redirigir a la página 'home.html' después de hacer clic en el botón 'Aceptar'
-
+          localStorage.setItem('UsuarioLogueado', JSON.stringify(user));
           printPerfil(user.image);
           console.log('+++');
           console.log(conversations);
