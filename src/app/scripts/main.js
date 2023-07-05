@@ -6,7 +6,17 @@ import swal from 'sweetalert2';
 import registrar from "./modules/registeruser";
 import { DateTime } from 'luxon';
 
+import axios from "axios";
+import responsive from "./modules/responsive";
 
+
+// Escucha el evento de cambio de tamaño de la ventana
+window.addEventListener('resize', () =>
+{
+
+  responsive();
+
+});
 
 const input = document.getElementById('myInput');
 const micOutline = document.getElementById('micOutline');
@@ -23,28 +33,6 @@ input.addEventListener('input', () => {
 });
 
 
-
-
-
-
-// // Manejador de evento para el click en sendOutline
-// sendOutline.addEventListener('click', () => {
-//   // Obtener el valor del input
-//   const inputText = input.value;
-
-//   // Obtener la hora actual usando Luxon
-//   const currentTime = DateTime.local().toFormat('HH:mm');
-
-//   // Realizar las acciones que desees con el valor del input y la hora actual
-
-//   console.log('ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ');
-//   console.log('Texto ingresado:', inputText);
-//   console.log('Hora actual:', currentTime);
-//   console.log('ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ');
-
-//   // Limpiar el input después de capturar su valor
-//   input.value = '';
-// });
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         buttonIngresa.addEventListener('click', (e) => {
         e.preventDefault();
         registerDiv.classList.add('hidden');
-        home.classList.remove('hidden');
+        loguinDiv.classList.remove('hidden');
         // homeDiv.classList.add('hidden');
     });
 

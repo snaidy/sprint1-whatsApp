@@ -31,7 +31,7 @@ const sendMessage = (endpoint, point) => {
             // console.log('Texto ingresado:', inputText);
             // console.log('Hora actual:', currentTime);
             // console.log('ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ');
-          
+            mensaje.id = point;
             mensaje.sendBy = endpoint;
             mensaje.date = formattedDate;
             mensaje.hour = currentTime;
@@ -44,7 +44,7 @@ const sendMessage = (endpoint, point) => {
             
             console.log('pppppppppppppppppp');
 
-            console.log('Enviado a la persona con id: ' + point)
+            console.log('Enviado con id: ' + point)
             console.log(mensaje);
     
             console.log('rrrrrrrrrrrrrrrrrrrr');

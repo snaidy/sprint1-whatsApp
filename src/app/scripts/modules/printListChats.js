@@ -1,97 +1,3 @@
-// import { getuser } from "../services/getuser";
-// import swal from 'sweetalert2';
-
-// const printListChats = async (array, endpoint) => {
-//   try {
-//     const idFriend = [];
-//     array.forEach((con) => {
-//       if (con.idUser1 !== endpoint) {
-//         idFriend.push(con.idUser1);
-//       }
-//       if (con.idUser2 !== endpoint) {
-//         idFriend.push(con.idUser2);
-//       }
-//     });
-
-//     console.log('_____');
-//     console.log(idFriend);
-//     console.log('_____');
-
-//     const listConver = [];
-//     array.forEach((chat) => {
-//       listConver.push(chat.chats);
-//     });
-
-//     const conver = [];
-//     for (let i = 0; i < listConver.length; i++) {
-//       const e = listConver[i];
-//       for (let j = 0; j < e.length; j++) {
-//         const l = e[j];
-//         if (j === e.length - 1) {
-//           const response = await getuser();
-//           const user = response.find((u) => u.id === j);
-//           conver.push(l.message);
-
-//           const contenedor = document.getElementById('alChatlist');
-//           const section = document.createElement('section');
-//           section.className = 'chatlist__block';
-
-//           const figure = document.createElement('figure');
-//           figure.className = 'chatlist__img';
-//           const img = document.createElement('img');
-//           img.src = user.image;
-//           img.alt = 'Imagen de Chat';
-//           img.className = 'cover';
-//           figure.appendChild(img);
-
-//           const detailsSection = document.createElement('section');
-//           detailsSection.className = 'chatlist__details';
-
-//           const headDiv = document.createElement('div');
-//           headDiv.className = 'chatlist__head';
-//           const h4 = document.createElement('h4');
-//           h4.textContent = user.name;
-//           const p = document.createElement('p');
-//           p.className = 'chatlist__time';
-//           p.textContent = l.hour;
-//           headDiv.appendChild(h4);
-//           headDiv.appendChild(p);
-
-//           const messageDiv = document.createElement('div');
-//           messageDiv.className = 'chatlist__message';
-//           const pEstado = document.createElement('p');
-//           pEstado.className = 'estado';
-//           pEstado.textContent = l.message;
-//           messageDiv.appendChild(pEstado);
-
-//           detailsSection.appendChild(headDiv);
-//           detailsSection.appendChild(messageDiv);
-//           section.appendChild(figure);
-//           section.appendChild(detailsSection);
-//           contenedor.appendChild(section);
-//         }
-//       }
-//     }
-
-//     console.log('_____');
-//     console.log(conver);
-//     console.log('_____');
-//   } catch (error) {
-//     swal.fire({
-//       title: 'Se ha producido un error.',
-//       text: `Error al obtener los datos de la API: ${error}`,
-//       icon: 'error',
-//       confirmButtonText: 'Aceptar',
-//     });
-//   }
-// };
-
-// export default printListChats;
-
-
-
-
-
 
 const container = document.getElementById('alChatlist');
 import { getuser } from "../services/getuser";
@@ -99,15 +5,28 @@ import swal from 'sweetalert2';
 import printHeaderChat from "./printHeaderChat";
 import printChat from "./printChat";
 import sendMessage from "./sendMessage";
+import editMessage from "./editMessage";
+import { getConversations } from "../services/getConversations";
+import patchVisto from "../services/patchVisto";
+import postMessage from "../services/postMessage";
+import deleteMessage from "../services/deleteMessage";
+import axios from "axios";
+import getlistChat from "../services/getlistChat";
+import patchPerfil from "../services/patchPerfil";
+import printPerfil from "./printPerfil";
+import responsive from "./responsive";
 
-const printListChats =  (array, endpoint) => 
+const printListChats = async (endpoint) => 
 
 {               
 
     try 
     {
+        const array = await getConversations(endpoint);
         const idFriend = [];
         let indicateChat = 0;
+        let idContact = 0;
+        let idLastChat = 0;
 
 
         array.sort(function(a, b) {
@@ -142,13 +61,27 @@ const printListChats =  (array, endpoint) =>
         console.log('_____');
 
         const listConver = [];
+        const listId = [];
 
         array.forEach(chat => {
 
             listConver.push(chat.chats);
+            listId.push(chat.id);
             
         });
         const conver = [];
+
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log(listId);
+        console.log(listConver);
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBB');
+
 
 
 
@@ -160,12 +93,13 @@ const printListChats =  (array, endpoint) =>
         {
             
             e.forEach(async (l,index) => 
-            { 
+            {  
+
                 console.log(i);
                 
                 const response = await getuser();
 
-                localStorage.setItem("usuariosRegistrados", JSON.stringify(response));
+                //localStorage.setItem("usuariosRegistrados", JSON.stringify(response));
                 let user = response.find(u => u.id == idFriend[i]);
 
                 const sendOutline = document.getElementById('sendOutline');
@@ -173,35 +107,9 @@ const printListChats =  (array, endpoint) =>
 
 
                 if (i == 0) 
-                { const status = 'Offline'
-                    if (user.flag) 
-                    {
-                        status = 'Online'
-                    }
-                        
+                { 
 
-                    const header = document.getElementById('header__up');
-
-                    header.innerHTML='';
-            
-                    header.innerHTML=`
-                    <span class="imgtext">
-                    <figure class="userimg">
-                        <img src=${user.image} alt="perfil" class="cover">
-                    </figure>
-                    <h4>${user.name} <br><span>${status}</span></h4>
-                </span>
-            
-                
-            
-                <nav class="nav">
-                    <ul class="nav__icon">
-                        
-                        <li><ion-icon name="search-outline"></ion-icon></li>
-                        <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
-                    </ul>
-                </nav>
-                    `    
+                    printHeaderChat(user.image, user.name, user.flag);
 
 
 
@@ -216,16 +124,80 @@ const printListChats =  (array, endpoint) =>
                     console.log(e);
                     console.log("KKKKKKKKKKKKKKKKKKKKKKKK");    
 
-                    printChat(e, endpoint);
+                    printChat(e, endpoint, listId[0]);
                 }
 
 
+                const userImg = document.getElementById('fotoPerfil');
+                const editProfileSection = document.querySelector('.edit-profile');
+                const profileNameInput = document.getElementById('profileNameInput');
+                const profileImageInput = document.getElementById('profileImageInput');
+                const headerPerfil = document.querySelector('.header');
+                const alChatlistPerfil = document.querySelector('.chatlist');
+                userImg.addEventListener('click', () => {
+
+                    headerPerfil.classList.add('hidden');
+                    alChatlistPerfil.classList.add('hidden');
+                    editProfileSection.style.display = 'block';
+                    const UsuarioLogueado = JSON.parse(localStorage.getItem('UsuarioLogueado'));
+                    profileNameInput.value = UsuarioLogueado.name;
+                    profileImageInput.value = UsuarioLogueado.image;
+
+                });
+                
+                
+                
+                const profileForm = document.querySelector('.profile-form');
+
+                profileForm.addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                
+                  // Obtén los valores de los inputs de nombre y foto de perfil
+
+                  const newName = profileNameInput.value;
+                  const newImage = profileImageInput.value;
+                
+                  const newUser = await patchPerfil (endpoint, newName, newImage);
+
+                  localStorage.setItem('UsuarioLogueado', JSON.stringify(newUser));
+                  printPerfil(newImage);
+                
+                  // Vuelve a ocultar la sección de edición de perfil y mostrar la sección principal
+                  editProfileSection.style.display = 'none';
+                  headerPerfil.classList.remove('hidden');
+                  alChatlistPerfil.classList.remove('hidden');
+                });
                 
 
 
+                
+                
+                const backButton = document.querySelector('.back-button');
+                backButton.addEventListener('click', () => {
+                  editProfileSection.style.display = 'none';
+                  headerPerfil.classList.remove('hidden');
+                  alChatlistPerfil.classList.remove('hidden');
+
+                });
+
+                
+
+                
 
                 if(index==(e.length-1))
                 {
+                    let bValor = 0;
+
+                    e.forEach((h, j) => 
+                    {
+                        if (h.sendBy == user.id) 
+                        {
+                            if (!h.flag) 
+                            {
+                                bValor++;
+                            }    
+                        }    
+                    });
 
 
 
@@ -267,6 +239,7 @@ const printListChats =  (array, endpoint) =>
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'chatlist__message';
                     const pEstado = document.createElement('p');
+                    
                     if (l.sendBy==endpoint) 
                     {
                         pEstado.className = 'estado';  
@@ -276,9 +249,23 @@ const printListChats =  (array, endpoint) =>
                             pEstado.className = 'estado yes';    
                         }
                     }
-                    
+
                     pEstado.textContent = l.message;
                     messageDiv.appendChild(pEstado);
+                    const bEstado = document.createElement('b');
+                    bEstado.textContent = bValor;
+                    e.forEach((h) => 
+                    {
+                        if (h.sendBy == user.id) 
+                        {
+                            if (!h.flag) 
+                            {
+                                
+                                messageDiv.appendChild(bEstado);
+                                p.className = 'chatlist__time unread';
+                            }    
+                        }    
+                    });
 
                     // Añade los elementos al DOM
                     detailsSection.appendChild(headDiv);
@@ -288,69 +275,21 @@ const printListChats =  (array, endpoint) =>
                     contenedor.appendChild(section);
 
                     
-                    section.addEventListener('click', () => 
+                    section.addEventListener('click', async () => 
                     {
+                        idContact = i;
+
+
                         const input = document.getElementById('myInput');
                         input.value = '';
-                        const vistoMe = JSON.parse(localStorage.getItem(`conversations_User_${endpoint}`));
-                        const vistoFriend = JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
 
-                        vistoMe.forEach(estado => 
-                        {
-                            if (estado.idUser1 == user.id || estado.idUser2 == user.id) 
-                            {
-                                const chatVisto = estado.chats;
-
-                                chatVisto.forEach(t => 
-                                {   
-                                    if (t.sendBy == user.id) 
-                                    {
-                                        //pEstado.classList.add('yes');
-                                        t.flag = true;
-
-        
-                                    }    
-                                });
-                            }
-
-                            
-                        });
-
-
-                        vistoFriend.forEach(estado => 
-                            {
-                                if (estado.idUser1 == endpoint || estado.idUser2 == endpoint) 
-                                {
-                                    const chatVisto = estado.chats;
-    
-                                    chatVisto.forEach(t => 
-                                    {   
-                                        if (t.sendBy == user.id) 
-                                        {
-                                            //pEstado.classList.add('yes');
-                                            t.flag = true;
-    
-            
-                                        }    
-                                    });
-                                }
-    
-                                
-                            });
-
-
-
-                        localStorage.setItem(`conversations_User_${endpoint}`, JSON.stringify(vistoMe));
-                        localStorage.setItem(`conversations_User_${user.id}`, JSON.stringify(vistoFriend));
-
-                        console.log("+++++++++++++++++++++++++++++++++++++");
-                        console.log(JSON.parse(localStorage.getItem(`conversations_User_${user.id}`)));
-                        console.log("+++++++++++++++++++++++++++++++++++++");
-
+                        patchVisto(listId[i], user.id);
 
                         const elementos = document.querySelectorAll('.active');
 
                         indicateChat = user.id;
+
+                        idLastChat = (l.id + 1);
 
                         elementos.forEach(elem => 
                         {
@@ -367,12 +306,35 @@ const printListChats =  (array, endpoint) =>
 
                         console.log(e);
                         console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCC');
+                        
 
-                        printChat(e, endpoint);
+
+                        const ver = await getConversations(endpoint);;
+
+                        ver.forEach(mensaje => 
+                            {
+                                if (mensaje.idUser1 == indicateChat || mensaje.idUser2 == indicateChat) 
+                                {
+                                    printChat(mensaje.chats, endpoint, listId[i]);
+
+                                }    
+                            });
+
+
+                        
+
+
+                            responsive();
+
+                            
+
+
+                        
 
                       });
    
                 }
+
                 
             });    
 
@@ -389,67 +351,46 @@ const printListChats =  (array, endpoint) =>
 
 
 
-        sendOutline.addEventListener('click', () => {
-    
-           
-            let newConver = sendMessage(endpoint, indicateChat);
+        sendOutline.addEventListener('click', async () => 
+        {
+        
 
-            let arrayCon = JSON.parse(localStorage.getItem(`conversations_User_${endpoint}`));
-            let pruebaTwo = JSON.parse(localStorage.getItem(`conversations_User_${indicateChat}`));
+            let verId = await getlistChat(listId[idContact]);
+            let idVer = idLastChat;
 
-            console.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
-            console.log(newConver);  
-            console.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
-
-
-
-            arrayCon.forEach(mensaje => 
+            verId.forEach((b, f) => 
             {
-                if (mensaje.idUser1 == indicateChat || mensaje.idUser2 == indicateChat) 
+                if (f == (verId.length-1)) 
                 {
-                    console.log("Nuevo mensaje Agregado.");   
-                    console.log(newConver);   
-                    mensaje.chats.push(newConver);
-                    console.log("Nuevo mensaje Agregado.");    
-                }    
+                    idVer = (b.id+1);
+                }
             });
+            let newConver = sendMessage(endpoint, idVer);
+            //postMessage (listId[idContact], newConver);
 
-            pruebaTwo.forEach(mensaje => 
-                {
-                    if (mensaje.idUser1 == endpoint || mensaje.idUser2 == endpoint) 
-                    {
-                        console.log("Nuevo mensaje Agregado.");   
-                        console.log(newConver);   
-                        mensaje.chats.push(newConver);
-                        console.log("Nuevo mensaje Agregado.");    
-                    }    
-                });
+            let prueba = await postMessage (listId[idContact], newConver);
 
-            localStorage.setItem(`conversations_User_${endpoint}`, JSON.stringify(arrayCon));
-            localStorage.setItem(`conversations_User_${indicateChat}`, JSON.stringify(pruebaTwo));
 
-            let prueba = JSON.parse(localStorage.getItem(`conversations_User_${endpoint}`));
             
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            console.log(prueba);  
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
             prueba.forEach(c => 
             {
-                if (c.idUser1 == indicateChat || c.idUser2 == indicateChat) 
-                {
-                    printChat(c.chats, endpoint);
-                }
+                
+                    printChat(prueba, endpoint, listId[idContact]);
+            
             });
+
+
 
 
            
 
-            // console.log("Los Usuarios son: ");
-            // console.log(JSON.parse(localStorage.getItem("usuariosRegistrados")));
+
           
 
         });
+
+
     } 
     catch (error) 
     {

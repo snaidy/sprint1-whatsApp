@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans: wght@300;400;500;600;700&display=swap");
-
+@import 'variables';
 * {
   margin: 0;
   padding: 0;
@@ -22,6 +22,66 @@
     flex: 30%;  
     background-color: white;
     border-right: 1px solid rgba(0, 0, 0, 0.3);
+
+    .edit-profile {
+      background-color: $color-terciario;
+      padding: 20px;
+      border-radius: 2px;
+      height: 100%;
+
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      gap: 10vh;
+
+      button 
+      {
+                      // Estilo específico para el botón de back
+                      font-size: 1.5em;
+                      margin-left: 0;
+                      cursor: pointer;
+        
+                      &:hover {
+                        color: #f70000;}
+      }
+      
+      .edit-profile__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        
+        h2 {
+          font-size: 1.5em;
+          margin-left: 10px;
+        }
+      }
+      
+      .profile-form {
+        display: flex;
+        flex-direction: column;
+        
+        label {
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+        
+        input {
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          margin-bottom: 10px;
+        }
+        
+        button {
+          padding: 10px 20px;
+          background-color: #06d755;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      }
+    }
     .header {
       //width: 20vw;
       display: flex;
@@ -186,7 +246,8 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    width: 300px;
+                    
+                    width: 100%;
 
                     p
                     {
@@ -285,6 +346,8 @@
         align-items: center;
         padding: 0 15px;
         border-radius: 1px;
+
+
 
         /* margin-left:1px; */
         
@@ -402,6 +465,22 @@
         &.me
         {
           justify-content: flex-end;
+          
+          .options-box {
+            display: none;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 5px;
+          }
+        
+          // Estilos para los enlaces de las opciones
+          .options-box a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 5px;
+          }
         }
 
         &.friend
@@ -541,3 +620,20 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #888;
 }
+
+
+
+@media (max-width: 767px) {
+  .container__right {
+    display: none;
+  }
+
+}
+
+
+@media (min-width: 769px) {
+  .backButton {
+    display: none;
+  }
+}
+

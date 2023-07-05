@@ -3,6 +3,9 @@ import getUserByPhone from "../services/getUserByPhone.js";
 import swal from 'sweetalert2';
 import { postU } from "../services/postuser.js";
 
+import axios from "axios";
+const url = 'https://whatsapp-8lqf.onrender.com/user';
+
 const registro = document.getElementById('registro');
 
 const registrar = () => {
@@ -11,6 +14,8 @@ const registrar = () => {
     
         const name = document.getElementById('name');
         const phoneNumber = document.getElementById('phone');
+
+        const password = document.getElementById('password').value;
         const password = document.getElementById('passwordRegister');
         const imageUrl = document.getElementById('image');
         const message = document.getElementById('message');
@@ -19,8 +24,15 @@ const registrar = () => {
         //     alert('Por favor, complete todos los campos.');
         //     return;
         //   }
+
+
+        
+        console.log(password);
+    
+
         console.log('contraseña', password);
         
+
         const newUser = {
             name: name.value,
             number: phoneNumber.value,
@@ -47,8 +59,24 @@ const registrar = () => {
               text: 'Puedes ingresar',
               icon: 'success',
               confirmButtonText: 'Aceptar'
+
+            }).then(() => {
+              axios.post(url, newUser)
+              .then(response => {
+                console.log('Usuario agregado:', response.data);
+              })
+              .catch(error => {
+                console.error('Error al agregar el usuario:', error);
+              });
+
+              
+              
+    
+            });
+
             })
             postU(newUser);
+
             
           } else {
               swal.fire({

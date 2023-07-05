@@ -1,6 +1,7 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 module.exports = {
   mode: "none",
   entry: {
@@ -9,6 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "js/app.bundle.js",
+    publicPath: "/sprint1-whatsApp/"
   },
   devServer: {
     port: 5050,
