@@ -402,6 +402,22 @@
         &.me
         {
           justify-content: flex-end;
+          
+          .options-box {
+            display: none;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 5px;
+          }
+        
+          // Estilos para los enlaces de las opciones
+          .options-box a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 5px;
+          }
         }
 
         &.friend

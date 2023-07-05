@@ -9,6 +9,33 @@ const validateLoguin = async (phoneNumber, password) => {
     try {
       const response = await getuser()
     // Buscar el usuario ingresado por número de celular y contraseña
+
+      const idLocalUser = [];
+      //let a = 0;
+
+      // if (localStorage.getItem(`conversations_User_1`)) 
+      // {
+      //   a = 1;
+      // }
+      // else
+      // {
+      //   response.forEach(n => 
+      //     {
+          
+      //       idLocalUser.push(n.id);
+    
+      //     });
+    
+      //     idLocalUser.forEach( async (m) => 
+      //     {
+      //       let conLocal = await getConversations(m);
+      //       localStorage.setItem(`conversations_User_${m}`, JSON.stringify(conLocal));
+    
+      //     });
+    
+  
+      // }
+
       const user = response.find(u => u.number === phoneNumber && u.password === password);
 
       
@@ -35,20 +62,20 @@ const validateLoguin = async (phoneNumber, password) => {
           console.log(conversations);
           console.log('+++');
 
-          let arrayConversations = [];
-
-          if (localStorage.getItem(`conversations_User_${user.id}`)) 
-          {
-            arrayConversations =  JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
-          } else 
-          {
-            localStorage.setItem(`conversations_User_${user.id}`, JSON.stringify(conversations));  
-            arrayConversations =  JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
-          }
+          // let arrayConversations = [];
+          
+          // if (localStorage.getItem(`conversations_User_${user.id}`)) 
+          // {
+          //   arrayConversations =  JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
+          // } else 
+          // {
+          //   localStorage.setItem(`conversations_User_${user.id}`, JSON.stringify(conversations));  
+          //   arrayConversations =  JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
+          // }
           
 
           console.log('---');
-          printListChats(arrayConversations, user.id);
+          printListChats(user.id);
           console.log('---');
           const home = document.getElementById('home');
           const loguinDiv = document.getElementById('loguin');

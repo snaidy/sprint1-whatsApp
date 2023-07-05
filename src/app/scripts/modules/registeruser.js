@@ -10,7 +10,7 @@ const registrar = () => {
     
         const name = document.getElementById('name');
         const phoneNumber = document.getElementById('phone');
-        const password = document.getElementById('password');
+        const password = document.getElementById('password').value;
         const imageUrl = document.getElementById('image');
         const message = document.getElementById('message');
         //voy a validar campos vacios
@@ -18,6 +18,9 @@ const registrar = () => {
         //     alert('Por favor, complete todos los campos.');
         //     return;
         //   }
+
+        
+        console.log(password);
     
         const newUser = {
             name: name.value,
