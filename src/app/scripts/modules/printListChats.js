@@ -14,6 +14,7 @@ import axios from "axios";
 import getlistChat from "../services/getlistChat";
 import patchPerfil from "../services/patchPerfil";
 import printPerfil from "./printPerfil";
+import responsive from "./responsive";
 
 const printListChats = async (endpoint) => 
 
@@ -92,7 +93,7 @@ const printListChats = async (endpoint) =>
         {
             
             e.forEach(async (l,index) => 
-            { 
+            {  
 
                 console.log(i);
                 
@@ -106,35 +107,9 @@ const printListChats = async (endpoint) =>
 
 
                 if (i == 0) 
-                { const status = 'Offline'
-                    if (user.flag) 
-                    {
-                        status = 'Online'
-                    }
-                        
+                { 
 
-                    const header = document.getElementById('header__up');
-
-                    header.innerHTML='';
-            
-                    header.innerHTML=`
-                    <span class="imgtext">
-                    <figure class="userimg">
-                        <img src=${user.image} alt="perfil" class="cover">
-                    </figure>
-                    <h4>${user.name} <br><span>${status}</span></h4>
-                </span>
-            
-                
-            
-                <nav class="nav">
-                    <ul class="nav__icon">
-                        
-                        <li><ion-icon name="search-outline"></ion-icon></li>
-                        <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
-                    </ul>
-                </nav>
-                    `    
+                    printHeaderChat(user.image, user.name, user.flag);
 
 
 
@@ -211,6 +186,18 @@ const printListChats = async (endpoint) =>
 
                 if(index==(e.length-1))
                 {
+                    let bValor = 0;
+
+                    e.forEach((h, j) => 
+                    {
+                        if (h.sendBy == user.id) 
+                        {
+                            if (!h.flag) 
+                            {
+                                bValor++;
+                            }    
+                        }    
+                    });
 
 
 
@@ -252,6 +239,7 @@ const printListChats = async (endpoint) =>
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'chatlist__message';
                     const pEstado = document.createElement('p');
+                    
                     if (l.sendBy==endpoint) 
                     {
                         pEstado.className = 'estado';  
@@ -261,9 +249,23 @@ const printListChats = async (endpoint) =>
                             pEstado.className = 'estado yes';    
                         }
                     }
-                    
+
                     pEstado.textContent = l.message;
                     messageDiv.appendChild(pEstado);
+                    const bEstado = document.createElement('b');
+                    bEstado.textContent = bValor;
+                    e.forEach((h) => 
+                    {
+                        if (h.sendBy == user.id) 
+                        {
+                            if (!h.flag) 
+                            {
+                                
+                                messageDiv.appendChild(bEstado);
+                                p.className = 'chatlist__time unread';
+                            }    
+                        }    
+                    });
 
                     // Añade los elementos al DOM
                     detailsSection.appendChild(headDiv);
@@ -321,6 +323,10 @@ const printListChats = async (endpoint) =>
 
                         
 
+
+                            responsive();
+
+                            
 
 
                         

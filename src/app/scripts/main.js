@@ -7,8 +7,16 @@ import registrar from "./modules/registeruser";
 import { DateTime } from 'luxon';
 
 import axios from "axios";
+import responsive from "./modules/responsive";
 
 
+// Escucha el evento de cambio de tamaño de la ventana
+window.addEventListener('resize', () =>
+{
+
+  responsive();
+
+});
 
 const input = document.getElementById('myInput');
 const micOutline = document.getElementById('micOutline');

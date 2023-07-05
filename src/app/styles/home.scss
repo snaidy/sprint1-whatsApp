@@ -246,7 +246,8 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    width: 300px;
+                    
+                    width: 100%;
 
                     p
                     {
@@ -345,6 +346,8 @@
         align-items: center;
         padding: 0 15px;
         border-radius: 1px;
+
+
 
         /* margin-left:1px; */
         
@@ -617,3 +620,20 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #888;
 }
+
+
+
+@media (max-width: 767px) {
+  .container__right {
+    display: none;
+  }
+
+}
+
+
+@media (min-width: 769px) {
+  .backButton {
+    display: none;
+  }
+}
+
