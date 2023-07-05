@@ -62,17 +62,6 @@ const validateLoguin = async (phoneNumber, password) => {
           console.log(conversations);
           console.log('+++');
 
-          // let arrayConversations = [];
-          
-          // if (localStorage.getItem(`conversations_User_${user.id}`)) 
-          // {
-          //   arrayConversations =  JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
-          // } else 
-          // {
-          //   localStorage.setItem(`conversations_User_${user.id}`, JSON.stringify(conversations));  
-          //   arrayConversations =  JSON.parse(localStorage.getItem(`conversations_User_${user.id}`));
-          // }
-          
 
           console.log('---');
           printListChats(user.id);
